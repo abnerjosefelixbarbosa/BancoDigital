@@ -1,4 +1,4 @@
 # Banco digital
 
-## Programa banco digita
+## Programa banco digital
 
