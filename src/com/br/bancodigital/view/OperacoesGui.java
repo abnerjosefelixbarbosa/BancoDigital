@@ -1,5 +1,6 @@
 package com.br.bancodigital.view;
 
+import com.br.bancodigital.controller.Navegacao;
 import com.br.bancodigital.model.Conta;
 
 import javax.swing.*;
@@ -13,6 +14,7 @@ public class OperacoesGui extends JFrame {
     private JButton trasnferirButton;
     private JButton fecharButton;
     private Conta c;
+    private Navegacao n = new Navegacao();
 
     public OperacoesGui(Conta c) {
         setContentPane(panel1);
@@ -31,7 +33,7 @@ public class OperacoesGui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Runnable t = () -> {
                     try {
-                        new SacarGui(c);
+                        n.sacarOperacao(c);
                         dispose();
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(null,ex.getMessage(),"Error",0);
@@ -47,7 +49,7 @@ public class OperacoesGui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Runnable t = () -> {
                     try {
-                        new DepositoGui(c);
+                        n.depositarOperacao(c);
                         dispose();
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(null,ex.getMessage(),"Error",0);
@@ -62,7 +64,7 @@ public class OperacoesGui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Runnable t = () -> {
                     try {
-                        new SelecaoTransferenciaGui(c);
+                        n.transferenciaOperacao(c);
                         dispose();
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(null,ex.getMessage(),"Error",0);
@@ -77,7 +79,7 @@ public class OperacoesGui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Runnable t = () -> {
                     try {
-                        new SelecaoGui();
+                        n.fecharOperacao();
                         dispose();
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(null,ex.getMessage(),"Error",0);

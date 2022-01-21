@@ -7,11 +7,10 @@ import com.br.bancodigital.model.ContaModel;
 
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SacarGui extends JFrame {
+public class SaqueGui extends JFrame {
     private JPanel panel1;
     private JLabel conta;
     private JLabel agencia;
@@ -21,11 +20,10 @@ public class SacarGui extends JFrame {
     private JLabel titular;
     private JButton finalizarButton;
     private Conta c;
-    private ContaModel cm = new ContaModel();
     private Navegacao n = new Navegacao();
     private ContaController cc = new ContaController();
 
-    public SacarGui(Conta c) {
+    public SaqueGui(Conta c) {
         setContentPane(panel1);
         setTitle("Tela de saque");
         setSize(1900,1000);
@@ -64,7 +62,9 @@ public class SacarGui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                     Runnable t = () -> {
                         try {
-                            cc.sacarSacar(Integer.parseInt(valor.getText()),c);
+                            if (cc.sacarSaque(Integer.parseInt(valor.getText()),c) == 1) {
+                                dispose();
+                            }
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(null,ex.getMessage(),"Error",0);
                         }
@@ -78,7 +78,8 @@ public class SacarGui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Runnable t = () -> {
                     try {
-                        n.finalizarSacar(c);
+                        n.finalizarSaque(c);
+                        dispose();
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(null,ex.getMessage(),"Error",0);
                     }
@@ -90,6 +91,6 @@ public class SacarGui extends JFrame {
     }
 
     public static void main(String[] args) {
-        new SacarGui(null);
+        new SaqueGui(null);
     }
 }

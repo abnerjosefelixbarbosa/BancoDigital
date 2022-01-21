@@ -1,7 +1,7 @@
 package com.br.bancodigital.view;
 
+import com.br.bancodigital.controller.ContaController;
 import com.br.bancodigital.model.Conta;
-import com.br.bancodigital.model.ContaModel;
 import com.br.bancodigital.model.Corrente;
 import com.br.bancodigital.model.Popanca;
 
@@ -19,11 +19,11 @@ public class ContaGui extends JFrame {
     private int contaOpcao;
     private Conta p = new Popanca();
     private Conta c = new Corrente();
-    private ContaModel cm = new ContaModel();
+    private ContaController cc = new ContaController();
 
     public ContaGui(int contaOpcao) {
         setContentPane(panel1);
-        setTitle("ContaTela");
+        setTitle("tela de conta");
         setSize(1900,1000);
         setDefaultCloseOperation(3);
         setLocationRelativeTo(null);
@@ -42,24 +42,17 @@ public class ContaGui extends JFrame {
                             if (contaOpcao == 1) {
                                 p.setAgenciaConta(agencia.getText());
                                 p.setNumerroConta(conta.getText());
-                                Conta k = cm.procuraConta(p);
 
-                                if (k != null) {
-                                    new OperacoesGui(k);
+                                if (cc.confirmarConta(p) == 0) {
                                     dispose();
-                                } else {
-                                    JOptionPane.showMessageDialog(null,"Conta inexistente!");
                                 }
-                            } else {
+                            }
+                            if (contaOpcao == 2) {
                                 c.setAgenciaConta(agencia.getText());
                                 c.setNumerroConta(conta.getText());
-                                Conta k = cm.procuraConta(c);
 
-                                if (k != null) {
-                                    new OperacoesGui(k);
+                                if (cc.confirmarConta(c) == 0) {
                                     dispose();
-                                } else {
-                                    JOptionPane.showMessageDialog(null,"Conta inexistente!");
                                 }
                             }
                         } catch (Exception ex) {

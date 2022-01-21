@@ -1,5 +1,6 @@
 package com.br.bancodigital.view;
 
+import com.br.bancodigital.controller.Navegacao;
 import com.br.bancodigital.model.Conta;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -10,10 +11,11 @@ public class SelecaoTransferenciaGui extends JFrame {
     private JButton popançaButton;
     private JButton correnteButton;
     private Conta c;
+    private Navegacao n = new Navegacao();
 
     public SelecaoTransferenciaGui(Conta c) {
         setContentPane(panel1);
-        setTitle("Seleção de transferência");
+        setTitle("tela de seleção de transferência");
         setSize(1900,1000);
         setDefaultCloseOperation(3);
         setLocationRelativeTo(null);
@@ -27,7 +29,7 @@ public class SelecaoTransferenciaGui extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Runnable t = () -> {
-                    new TransferirGui(1,c);
+                    n.selecaoTransferencia(1,c);
                     dispose();
                 };
 
@@ -38,7 +40,7 @@ public class SelecaoTransferenciaGui extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Runnable t = () -> {
-                    new TransferirGui(2,c);
+                    n.selecaoTransferencia(2,c);
                     dispose();
                 };
 

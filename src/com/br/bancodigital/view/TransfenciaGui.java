@@ -1,5 +1,7 @@
 package com.br.bancodigital.view;
 
+import com.br.bancodigital.controller.ContaController;
+import com.br.bancodigital.controller.Navegacao;
 import com.br.bancodigital.model.Conta;
 import com.br.bancodigital.model.ContaModel;
 import com.br.bancodigital.model.Corrente;
@@ -7,11 +9,10 @@ import com.br.bancodigital.model.Popanca;
 
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TransferirGui extends JFrame {
+public class TransfenciaGui extends JFrame {
     private JPanel panel1;
     private JFormattedTextField valor;
     private JButton transferirButton;
@@ -26,8 +27,10 @@ public class TransferirGui extends JFrame {
     private Conta c1;
     private Conta c2;
     private ContaModel cm = new ContaModel();
+    private ContaController cc = new ContaController();
+    private Navegacao n = new Navegacao();
 
-    public TransferirGui(int i,Conta c) {
+    public TransfenciaGui(int i, Conta c) {
         setContentPane(panel1);
         setTitle("Tela de transferência");
         setSize(1900,1000);
@@ -51,33 +54,17 @@ public class TransferirGui extends JFrame {
                             c2 = new Popanca();
                             c2.setAgenciaConta(agencia2.getText());
                             c2.setNumerroConta(conta2.getText());
-                            String resultado = cm.transferirConta(Integer.parseInt(valor.getText()),c1,c2);
-                            Conta k1 = cm.procuraConta(c1);
-                            Conta k2 = cm.procuraConta(c2);
 
-                            if (resultado.equals("")) {
-                                JOptionPane.showMessageDialog(null,"Operação realizada com sucesso!");
-                                JOptionPane.showMessageDialog(null,k1.imprimir() + "\n" + k2.imprimir());
-                                new OperacoesGui(c1);
+                            if (cc.transferirTransferencia(Integer.parseInt(valor.getText()),c1,c2) == 1) {
                                 dispose();
-                            } else {
-                                JOptionPane.showMessageDialog(null,resultado);
                             }
                         } else {
                             c2 = new Corrente();
                             c2.setAgenciaConta(agencia2.getText());
                             c2.setNumerroConta(conta2.getText());
-                            String resultado = cm.transferirConta(Integer.parseInt(valor.getText()),c1,c2);
-                            Conta k1 = cm.procuraConta(c1);
-                            Conta k2 = cm.procuraConta(c2);
 
-                            if (resultado.equals("")) {
-                                JOptionPane.showMessageDialog(null,"Operação realizada com sucesso!");
-                                JOptionPane.showMessageDialog(null,k1.imprimir() + "\n" + k2.imprimir());
-                                new OperacoesGui(c1);
+                            if (cc.transferirTransferencia(Integer.parseInt(valor.getText()),c1,c2) == 1) {
                                 dispose();
-                            } else {
-                                JOptionPane.showMessageDialog(null,resultado);
                             }
                         }
                     } catch (Exception ex) {
@@ -92,7 +79,7 @@ public class TransferirGui extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Runnable t = () -> {
-                    new OperacoesGui(c1);
+                    n.finalizarTransferencia(c1);
                     dispose();
                 };
 
@@ -135,6 +122,6 @@ public class TransferirGui extends JFrame {
     }
 
     public static void main(String[] args) {
-        new TransferirGui(0,null);
+        new TransfenciaGui(0,null);
     }
 }

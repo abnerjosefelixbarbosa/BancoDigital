@@ -1,5 +1,7 @@
 package com.br.bancodigital.view;
 
+import com.br.bancodigital.controller.ContaController;
+import com.br.bancodigital.controller.Navegacao;
 import com.br.bancodigital.model.Conta;
 import com.br.bancodigital.model.ContaModel;
 
@@ -18,7 +20,8 @@ public class DepositoGui extends JFrame {
     private JButton depositarButton;
     private JButton finalizarButton;
     private Conta c;
-    private ContaModel cm = new ContaModel();
+    private ContaController cc = new ContaController();
+    private Navegacao n = new Navegacao();
 
     public DepositoGui(Conta c) {
         setContentPane(panel1);
@@ -59,15 +62,8 @@ public class DepositoGui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Runnable t = () -> {
                     try {
-                        String resultado = cm.depositarConta(Integer.parseInt(valor.getText()),c);
-                        Conta k = cm.procuraConta(c);
-
-                        if (resultado.equals("")) {
-                            JOptionPane.showMessageDialog(null,k.imprimir());
-                            new OperacoesGui(c);
+                        if (cc.depositarDeposito(Integer.parseInt(valor.getText()),c) == 1) {
                             dispose();
-                        } else {
-                            JOptionPane.showMessageDialog(null,resultado);
                         }
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(null,ex.getMessage(),"Error",0);
@@ -81,7 +77,7 @@ public class DepositoGui extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Runnable t = () -> {
-                    new SelecaoGui();
+                    n.finalizarDeposito(c);
                     dispose();
                 };
 
