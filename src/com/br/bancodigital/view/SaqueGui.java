@@ -1,5 +1,7 @@
 package com.br.bancodigital.view;
 
+import com.br.bancodigital.controller.ContaController;
+import com.br.bancodigital.controller.Navegacao;
 import com.br.bancodigital.model.Conta;
 import com.br.bancodigital.model.ContaModel;
 
@@ -20,6 +22,8 @@ public class SacarGui extends JFrame {
     private JButton finalizarButton;
     private Conta c;
     private ContaModel cm = new ContaModel();
+    private Navegacao n = new Navegacao();
+    private ContaController cc = new ContaController();
 
     public SacarGui(Conta c) {
         setContentPane(panel1);
@@ -60,16 +64,7 @@ public class SacarGui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                     Runnable t = () -> {
                         try {
-                            String resultado = cm.sacarConta(Integer.parseInt(valor.getText()),c);
-                            Conta k = cm.procuraConta(c);
-
-                            if (resultado.equals("")) {
-                                JOptionPane.showMessageDialog(null,k.imprimir());
-                                new OperacoesGui(c);
-                                dispose();
-                            } else {
-                                JOptionPane.showMessageDialog(null,resultado);
-                            }
+                            cc.sacarSacar(Integer.parseInt(valor.getText()),c);
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(null,ex.getMessage(),"Error",0);
                         }
@@ -83,8 +78,7 @@ public class SacarGui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Runnable t = () -> {
                     try {
-                        new SelecaoGui();
-                        dispose();
+                        n.finalizarSacar(c);
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(null,ex.getMessage(),"Error",0);
                     }
