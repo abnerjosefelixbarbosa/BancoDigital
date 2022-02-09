@@ -19,7 +19,7 @@ O projeto BancoDigital tem a finalidade de gerenciar o acessos de contas no banc
 
 # Execução do projeto
 
-Java 8
+Java 16
 
 ```java
 # clonar repositório
