@@ -8,15 +8,28 @@ O projeto BancoDigital tem a finalidade de gerenciar o acessos de contas no banc
 # Features
 
 - Java
-- Spring Boot
-- JPA / Hibernate
-- Maven
+- Arquitetura MVC
 - Lombok
-- MySQL
-- PostgreSQL
 - IDE IntelliJ
-- Listar todos os estudantes.
-- Listar todos as inscrições.
-- Editar dados dos estudantes.
-- Savar dados dos estidantes.
-- Savar dados das inscrições.
+- Imprimir dados da conta
+- Confirmar conta
+- Sacar conta
+- Depositar conta
+- Transferir conta
+
+# Execução do projeto
+
+Java 8
+
+```java
+# clonar repositório
+git clone https://github.com/abnerjosefelixbarbosa/BancoDigital.git
+
+# exercutar o projeto
+src/com/br/bancodigital/view/SelecaoGui
+```
+# Autor
+
+Abner José Felix Barbosa
+
+https://www.linkedin.com/in/abner-jose-feliz-barbosa-552a17166/
