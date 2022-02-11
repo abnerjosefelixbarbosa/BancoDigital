@@ -17,6 +17,17 @@ O projeto BancoDigital tem a finalidade de gerenciar o acessos de contas no banc
 - Depositar conta
 - Transferir conta
 
+# Contas de acesso
+
+```java
+# conta popança
+6954
+2491-1
+# conta corrente
+5450
+511090-2
+```
+
 # Execução do projeto
 
 Java 16
